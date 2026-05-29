@@ -1,0 +1,3 @@
+TITLE = "Visualization of the surface solution"
+VARIABLES = "x","y","z","Density","Momentum_x","Momentum_y","Momentum_z","Energy","Nu_Tilde","Pressure","Temperature","Mach","C<sub>p</sub>","<greek>m</greek>","C<sub>f</sub>_x","C<sub>f</sub>_y","C<sub>f</sub>_z","h","y<sup>+</sup>","<greek>m</greek><sub>t</sub>","DES_LengthScale","Wall_Distance"
+ZONE NODES= 0, ELEMENTS= 0, DATAPACKING=POINT, ZONETYPE=FEQUADRILATERAL

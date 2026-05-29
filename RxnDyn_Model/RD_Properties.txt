@@ -1,0 +1,28 @@
+# gamma1
+1.4 
+# gammaj 
+1.4 
+# Po1 (MPa)
+2.17
+# SPR (Poj/Po1)
+1.0
+# NPR (Po1/Pambient)
+30.7
+# Total nozzle length (mm)
+32.65
+# Injection location (xm/xt)
+0.9
+# Throat radius (mm)
+11.582 
+# Exit Mach number (Me)
+2.88
+# Discharge coefficient (Cd)
+0.9
+# Injector diameter (mm)
+4.2 
+# Ending angle (deg.)
+8.5
+# Stagnation temperature (K)
+2600.
+# Ideal gas constant (J/mK)
+287.058

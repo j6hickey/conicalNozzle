@@ -1,0 +1,3 @@
+TITLE = "SU2 Simulation"
+VARIABLES = "Iteration","CL","CD","CSF","CMx","CMy","CMz","CFx","CFy","CFz","CL/CD","AoA","Custom_ObjFunc","HeatFlux_Total","HeatFlux_Maximum","Temperature_Total","Res_Flow[0]","Res_Flow[1]","Res_Flow[2]","Res_Flow[3]","Res_Flow[4]","Res_Turb[0]","Avg_MassFlow","Avg_Mach","Avg_Temp","Avg_Press","Avg_Density","Avg_Enthalpy","Avg_NormalVel","Uniformity","Secondary_Strength","Momentum_Distortion","Secondary_Over_Uniformity","Avg_TotalTemp","Avg_TotalPress","Pressure_Drop","Linear_Solver_Iterations","CFL_Number","Time(min)"
+ZONE T= "Convergence history"
