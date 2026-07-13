@@ -1,0 +1,167 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: snappyHexMeshDict                    |
+|  \\    /   O peration     | Local refinement without STL                    |
+|   \\  /    A nd           |                                                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+
+// ------------------------------------------------------------
+// Overall switches
+// ------------------------------------------------------------
+
+castellatedMesh true;
+snap            false;
+//addLayers       false;
+addLayers true;
+mergeTolerance 1e-6;
+// ------------------------------------------------------------
+// Geometry (NO STL USED)
+// ------------------------------------------------------------
+
+geometry
+{
+    refineBox
+    {
+        type searchableBox;
+        min (-0.07 0.04 -0.002);
+        max (-0.09 0.085 0.002);
+    }
+
+    refineSphere
+    {
+        type searchableSphere;
+        centre (-0.04 0.075 0.0);
+        radius 0.01;
+    }
+
+    refineJet
+    {
+        type searchableCone;
+        point1 (-0.04 0.085 0.0);
+        point2 (-0.06 0.085 -0.02);	
+        radius1 0.005;
+	radius2 0.01;
+    }
+
+}
+
+// ------------------------------------------------------------
+// Castellated mesh controls
+// ------------------------------------------------------------
+
+castellatedMeshControls
+{
+    maxLocalCells 1000000;
+    maxGlobalCells 2000000;
+    minRefinementCells 10;
+    nCellsBetweenLevels 3;
+
+    features ();
+
+    refinementSurfaces{};
+
+    refinementRegions
+    {
+
+        refineCone
+        {
+            mode inside;
+            levels ((1E15 2));   // Level 2 refinement inside sphere
+        }
+	refineBox
+        {
+            mode inside;
+            levels ((1E15 2));   // Level 2 refinement inside sphere
+        }
+    }
+
+    resolveFeatureAngle 30;
+
+    locationInMesh (-0.05 0.01 0.0);  // MUST be inside your domain
+
+    allowFreeStandingZoneFaces true;
+}
+
+// ------------------------------------------------------------
+// Snap controls (disabled but required block)
+// ------------------------------------------------------------
+
+snapControls
+{
+    nSmoothPatch 3;
+    tolerance 2.0;
+    nSolveIter 30;
+    nRelaxIter 5;
+}
+
+// ------------------------------------------------------------
+// Layer addition controls (disabled but required block)
+// ------------------------------------------------------------
+
+addLayersControls
+{
+   // relativeSizes true;
+   // layers {};
+     relativeSizes    true;
+    expansionRatio   1.2;
+    finalLayerThickness 0.3;
+    minThickness     0.1;
+    nGrow            0;
+
+    layers
+    {
+        wall         // <-- your blockMesh patch name
+        {
+            nSurfaceLayers 3;
+        }
+    }
+
+    // mesh quality controls
+    nSmoothSurfaceNormals   1;
+    nSmoothNormals          3;
+    nSmoothThickness        10;
+    nRelaxIter              5;
+    nBufferCellsNoExtrude   0;
+    nLayerIter              50;
+}
+
+// ------------------------------------------------------------
+// Mesh quality controls
+// ------------------------------------------------------------
+
+meshQualityControls
+{
+    maxNonOrtho 65;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 4;
+    maxConcave 80;
+    minFlatness 0.5;
+    minVol 1e-13;
+    minTetQuality 1e-30;
+    minArea -1;
+    minTwist 0.02;
+    minDeterminant 0.001;
+    minFaceWeight 0.02;
+    minVolRatio 0.01;
+    minTriangleTwist -1;
+
+    nSmoothScale 4;
+    errorReduction 0.75;
+}
+
+// ------------------------------------------------------------
+// Debug
+// ------------------------------------------------------------
+
+debug 0;
+
+// ************************************************************************* //

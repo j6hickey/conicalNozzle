@@ -1,0 +1,41 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      createPatchDict;
+}
+
+pointSync false;
+
+// Patches to create
+patches (
+    {
+        name            front;
+        patchInfo
+        {
+            type            cyclic;
+            neighbourPatch  back;
+	    inGroups 1(cyclicAMI);
+            transform rotational;
+            rotationAxis (1 0 0);
+            rotationCentre (0 0 0);
+        }
+        constructFrom   patches;
+        patches         (frontPatch); // Name in original mesh
+    }
+    {
+        name            back;
+        patchInfo
+        {
+	      type            cyclic;
+            neighbourPatch  front;
+            inGroups 1(cyclicAMI);
+            transform rotational;
+            rotationAxis (1 0 0);
+            rotationCentre (0 0 0);
+        }
+        constructFrom   patches;
+        patches         (backPatch); // Name in original mesh
+    }
+);
